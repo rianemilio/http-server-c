@@ -1,0 +1,25 @@
+# --- Binários Compilados ---
+# Ignora o diretório de binários
+/bin/
+
+# Ignora qualquer arquivo com extensão .o (arquivos objeto)
+*.o
+
+# Ignora qualquer arquivo com extensão .out
+*.out
+
+# --- Arquivos de IDEs e Editores ---
+.vscode/
+.idea/
+
+# Arquivos de backup do VIM
+*~
+*.swp
+*.swo
+
+# Arquivos do macOS
+.DS_Store
+
+# --- Outros ---
+# Ignora logs de erro ou de debug
+*.log
