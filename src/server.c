@@ -1,5 +1,6 @@
 #include "server.h"
 #include "utils.h"
+#include "http.h"
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
@@ -9,7 +10,6 @@
 void start_server(int port) {
     int server_fd, client_fd;
     struct sockaddr_in server_addr;
-    socklen_t client_addr_len = sizeof(struct sockaddr_in);
 
     // 1. Cria o soquete (AF_INET = IPv4, SOCK_STREAM = TCP)
     server_fd = socket(AF_INET, SOCK_STREAM, 0);
@@ -44,12 +44,15 @@ void start_server(int port) {
             continue; // Em caso de erro, apenas continua
         }
 
-        printf("Nova conexão aceita!\n");
 
-        // A lógica de tratamento da requisição virá aqui.
+        printf("\nNova conexão aceita!\n");
         
-        // Por agora, apenas fecha a conexão.
+        // Chama a função para lidar com a requisição HTTP
+        handle_connection(client_fd);
+        
+        // Fecha a conexão após o tratamento
         close(client_fd);
+        printf("Conexão fechada.\n");
     }
 
     // Fecha o soquete principal ao encerrar (não alcançado no loop)
